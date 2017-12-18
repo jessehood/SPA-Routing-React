@@ -7,23 +7,24 @@ const app = express();
 app.use(bodyParser.json());
 app.use(CORS());
 
+let id = 0;
 const movies = [
 	{
-		id: 0,
+		id: ++id,
 		title: 'The Godfather',
 		director: 'Francis Ford Coppola',
 		metascore: 100,
 		stars: ['Marlon Brando', 'Al Pacino', 'Robert Duvall'],
 	},
 	{
-		id: 1,
+		id: ++id,
 		title: 'Star Wars',
 		director: 'George Lucas',
 		metascore: 92,
 		stars: ['Mark Hamill', 'Harrison Ford', 'Carrie Fisher'],
 	},
 	{
-		id: 2,
+		id: ++id,
 		title: 'The Lord of the Rings: The Fellowship of the Ring',
 		director: 'Peter Jackson',
 		metascore: 92,
@@ -41,7 +42,13 @@ app.get('/api/movies/:id', (req, res) => {
 });
 
 app.post('/api/movies', (req, res) => {
-	if (req.body.id !== undefined) movies.push(req.body);
+	let newMovie;
+	if (req.body.title !== undefined) {
+		newMovie = req.body;
+		newMovie.id = ++id;
+		newMovie.stars = newMovie.stars.split(' ,');
+		movies.push(newMovie);
+	}
 	res.status(201).json(movies);
 });
 

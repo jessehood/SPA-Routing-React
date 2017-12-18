@@ -11,6 +11,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import MovieList from './components/MovieList/MovieList';
 import Header from './components/Header/Header';
 import MovieDetailed from './components/MovieDetailed/MovieDetailed';
+import MovieInput from './components/MovieInput/MovieInput';
 
 const reducer = combineReducers({
   movies: moviesReducer
@@ -28,6 +29,7 @@ ReactDOM.render(
         <Header />
         <Route path="/movies/:id" component={MovieDetailed} />
         <Route path="/" component={MovieList} exact /> 
+        <Route path="/new-movie" component={MovieInput} />
       </div>
     </BrowserRouter>
 </Provider>, 

@@ -1,3 +1,7 @@
 .header {
   background-color: lightblue;
 }
+
+.header__link {
+  padding-right: 10px;
+}
