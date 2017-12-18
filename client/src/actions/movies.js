@@ -6,15 +6,9 @@ export const GET_MOVIE_BY_ID = 'GET_MOVIE_BY_ID';
 
 export const getMovies = () => {
   const movies = axios.get('http://localhost:5000/api/movies');
-  return (dispatch) => {
-    return movies.then(
-      response => {
-        dispatch({
-          type: GET_MOVIES,
-          payload: response
-        });
-      }
-    )
+  return {
+    type: GET_MOVIES,
+    payload: movies
   }
 };
 

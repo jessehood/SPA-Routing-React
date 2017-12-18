@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
-import promiseMiddleware from 'redux-promise';
+import promiseMiddleware from 'redux-promise-middleware';
 import moviesReducer from './reducers/movies';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import MovieList from './components/MovieList/MovieList';
@@ -21,7 +21,7 @@ const client = axios.create({
 });
 
 const store = createStore(reducer, applyMiddleware(
-  axiosMiddleware(client)
+  promiseMiddleware()
 ));
 
 

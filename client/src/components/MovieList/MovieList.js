@@ -7,10 +7,14 @@ class MovieList extends React.Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    movies: []
+  }
 
-  async componentDidMount() {
-    const movie = this.props.getMovies();
-    console.log(movie);
+  componentDidMount() {
+    Promise.resolve(this.props.getMovies()).then((response) => {
+      this.setState({movies: response.value.data});  
+    });
   }
 
   render() {
@@ -18,8 +22,8 @@ class MovieList extends React.Component {
       return (
         <div>
           <div>Movie List</div>
-          {[].map((movie, i) => {
-            return (<div key={i}>{movie}</div>);
+          {this.state.movies.map((movie, i) => {
+            return (<div key={i}>{movie.title}</div>);
           })}
         </div>
       );
