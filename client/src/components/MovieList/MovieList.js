@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './MovieList.css';
 import { getMovies } from '../../actions/movies';
+import Movie from '../Movie/Movie';
 
 class MovieList extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class MovieList extends React.Component {
         <div>
           <div>Movie List</div>
           {this.state.movies.map((movie, i) => {
-            return (<div key={i}>{movie.title}</div>);
+            return (<Movie key={i} {...movie}/>);
           })}
         </div>
       );
