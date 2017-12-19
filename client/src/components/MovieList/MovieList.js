@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './MovieList.css';
 import { getMovies } from '../../actions/movies';
 import Movie from '../Movie/Movie';
-
+import { bindActionCreators } from 'redux';
 class MovieList extends React.Component {
   constructor(props) {
     super(props);
@@ -13,22 +13,18 @@ class MovieList extends React.Component {
   }
 
   componentDidMount() {
-    Promise.resolve(this.props.getMovies()).then((response) => {
-      this.setState({movies: response.value.data});  
-    });
+    this.props.dispatch(getMovies());
   }
 
   render() {
-    if (this.props.movies) {
-      return (
-        <div>
-          <div>Movie List</div>
-          {this.state.movies.map((movie, i) => {
-            return (<Movie key={i} {...movie}/>);
-          })}
-        </div>
-      );
-    }
+    return (
+      <div>
+        <div>Movie List</div>
+        {this.props.movies.map((movie, i) => {
+          return (<Movie key={i} {...movie}/>);
+        })}
+      </div>
+    );
   }
 }
 
@@ -36,5 +32,8 @@ const mapStateToProps = (state) => {
   return { movies: state.movies };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({getMovies}, dispatch);
+};
 
-export default connect(mapStateToProps, { getMovies })(MovieList);
+export default connect(mapStateToProps, null)(MovieList);

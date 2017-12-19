@@ -12,14 +12,12 @@ import MovieList from './components/MovieList/MovieList';
 import Header from './components/Header/Header';
 import MovieDetailed from './components/MovieDetailed/MovieDetailed';
 import MovieInput from './components/MovieInput/MovieInput';
-
+import thunk from 'redux-thunk';
 const reducer = combineReducers({
   movies: moviesReducer
 });
 
-const store = createStore(reducer, applyMiddleware(
-  promiseMiddleware()
-));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 
 ReactDOM.render(
